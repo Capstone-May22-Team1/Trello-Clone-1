@@ -8,17 +8,26 @@ const ListSchema = new Schema({
   },
   boardId: {
     type: Schema.Types.ObjectId,
+    ref: 'Board',
     required: [true, 'The BoardId is required']
   },
   createdAt: {
     type: Schema.Types.Date,
+    default: Date.now,
   },
   updatedAt: {
     type: Schema.Types.Date,
+    default: Date.now,
   },
   position: {
     type: Schema.Types.Decimal128
-  }
+  },
+  cards: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Card',
+    }
+  ],
 })
 
 const List = mongoose.model('List', ListSchema);
@@ -44,5 +53,6 @@ module.exports = List;
   "createdAt": "2020-10-06T23:40:26.606Z",
   "updatedAt": "2020-10-06T23:40:26.606Z",
   "position": 65535.0
+
 }
 */

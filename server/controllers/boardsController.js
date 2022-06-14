@@ -1,6 +1,10 @@
 const Board = require("../models/board");
+const List = require("../models/list")
+const Card = require("../models/card")
 const HttpError = require("../models/httpError");
 const { validationResult } = require("express-validator");
+
+// Add a new `get` route to `/boards/:id`.
 
 const getBoards = (req, res, next) => {
   Board.find({}, "title _id createdAt updatedAt").then((boards) => {
@@ -27,5 +31,21 @@ const createBoard = (req, res, next) => {
   }
 };
 
+const getBoard = (req, res, next) => {
+  const id = req.params.id
+  Board.findById(id)
+  .populate({
+    path: 'lists',
+    populate: { path: 'cards' }
+  })
+  .then((board) => {
+    res.json(board)
+  }).catch((err) => {
+    next(new HttpError("Board does not exist", 404))
+  })
+}
+
+
+exports.getBoard = getBoard;
 exports.getBoards = getBoards;
 exports.createBoard = createBoard;

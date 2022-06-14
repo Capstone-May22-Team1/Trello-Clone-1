@@ -21,7 +21,7 @@ axios.defaults.headers.common["Accept"] = "application/json";
 const apiClient = {
   getBoards: function(callback) {
     return axios
-      .get(routes.BOARDS_INDEX_URL)
+      .get(routes.BOARDS_INDEX_URL) 
       .then(unwrapData)
       .then(callback)
       .catch(logError);

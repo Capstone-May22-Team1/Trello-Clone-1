@@ -16,6 +16,7 @@ const CardSchema = new Schema({
   ],
   listId: {
     type: Schema.Types.ObjectId,
+    ref: 'List',
     required: [true, 'The ListId is required']
   },
   position: {
@@ -50,7 +51,7 @@ const CardSchema = new Schema({
     type: Array,
   },
   commentsCount: {
-    type: Schema.Types.Int32
+    type: Schema.Types.Number
   }
 })
 
@@ -77,4 +78,7 @@ module.exports = Card;
   "actions": []
   "commentsCount": 0
 }
+
+title
+listId
 */
